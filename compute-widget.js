@@ -27,8 +27,45 @@
     '</span>'
   )
 
-  function openConsole() {
-    alert($(this).attr('data-ip') + ' action!')
+  var consoleTemplate = _.template(
+    '<div class="js-console modal hide fade">' +
+    '  <div class="modal-header">' +
+    '    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
+    '    <h3>compute.Instance</h3>' +
+    '  </div>' +
+    '  <div class="modal-body">' +
+    '  <ul class="nav nav-tabs js-compute-tabs">' +
+    '    <li class="active"><a href="#execute">Execute command</a></li>' +
+    '    <li class="">      <a href="#get">Reveal files</a></li>' +
+    '    <li class="">      <a href="#put">Upload file</a></li>' +
+    '  </ul>' +    
+    '  <div class="tab-content">' +
+    '    <div class="tab-pane active" id="execute">' +
+    '       <pre id="compute-widget-console"/>' +      
+    '       <input type="text"/>' +
+    '       <button type="button" class="js-execute-file">Execute</button>' +
+    '    </div>' +
+    '    <div class="tab-pane" id="get">...</div>' +
+    '    <div class="tab-pane" id="put"><input type="file"/></div>' +
+    '  </div>' +
+    '  </div>' +
+    '</div>'
+  );
+
+  function openConsole() {            
+    var $console = $("body").find(".js-console");
+    if ($console.length == 0) {
+      $console = $(consoleTemplate());
+      $("body").append($console);
+    }
+    $console.on("click", ".close", function() {
+      $console.removeClass("in");
+    });
+    $console.find('.js-compute-tabs a').click(function (e) {
+      e.preventDefault();
+      $(this).tab('show');
+    });
+    $console.attr("style", "display: block;").addClass("in");
   }
   
   function ComputeInstance(property, location, instance) {
