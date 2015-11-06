@@ -1,0 +1,36 @@
+.tab-pane .compute-command-control {
+  height: 25px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.compute-command-output {
+  height: 200px;
+  overflow-y: scroll;
+  overflow-x: auto;
+  padding-bottom: 0px;
+}
+
+.compute-command-panel {
+  width: 100%;
+}
+
+.compute-command-input-wrapper {
+  display: block;
+  overflow: hidden;
+}
+
+.compute-command-input {
+  width: 100%;
+  box-sizing: border-box;  
+}
+
+button.compute-command-button {
+  float: right;
+  width: 5em;  
+  margin-left: 10px;
+}
+
+.compute-stderr {
+  color: red;
+}

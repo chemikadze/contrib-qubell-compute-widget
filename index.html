@@ -15,11 +15,28 @@
 
   <!-- 3. Specify sample data and render it. -->
   <script>
-    var instance = {instanceId: 'iId', applicationId: 'aId', organizationId: 'oId'}
+    var instance = {
+      instanceId: 'iId', 
+      applicationId: 'aId', 
+      organizationId: 'oId',
+      submodules: [
+        {componentId: "workflow1", interfaces: {}},
+        {componentId: "compute1", interfaces: {compute: {signals: {networks: {public: {"ip": "192.168.0.2"}, eth0: {"ipv6": "aa::de:ad:f0:0d"}}}}}}
+      ]
+    }
     var returnValues = [
       {id: 'compute.networks' ,  title: "test",   value: {"public": {"ip": "192.168.0.2"}, "eth0": {"ipv6": "aa::de:ad:f0:0d"}}}
     ]
     var userData = {}
+    $.ajax = function(args) {
+      if (args.url == "/api/1/services/instance.component/command") {
+        return {
+          done: function(callback) {
+            callback({"???": "???"})
+          }
+        }
+      }
+    }
   </script>
 
   <!-- 4. Ignore stuff below. -->
